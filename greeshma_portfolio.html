@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greeshma — AI & LLM Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;
+  --bg2:#111;
+  --bg3:#181818;
+  --line:rgba(255,255,255,0.07);
+  --text:#f2ede8;
+  --muted:rgba(242,237,232,0.4);
+  --muted2:rgba(242,237,232,0.65);
+  --accent:#c8f04d;
+  --accent-dim:rgba(200,240,77,0.1);
+  --serif:'DM Serif Display',serif;
+  --sans:'DM Sans',sans-serif;
+  --mono:'Space Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s,width 0.3s,height 0.3s}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(200,240,77,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.12s ease}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 52px;
+  border-bottom:1px solid var(--line);
+  background:rgba(10,10,10,0.8);
+  backdrop-filter:blur(16px);
+}
+.nav-logo{font-family:var(--serif);font-size:19px;color:var(--text);text-decoration:none;letter-spacing:-0.3px}
+
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.nav-status{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);font-family:var(--mono)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding-top:88px;
+  display:grid;
+  grid-template-rows:1fr auto;
+  border-bottom:1px solid var(--line);
+  position:relative;
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 420px;
+  min-height:calc(100vh - 88px);
+}
+.hero-left{
+  padding:64px 52px;
+  border-right:1px solid var(--line);
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.hero-eyebrow{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:0;
+}
+.eyebrow-tag{font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:1.5px;text-transform:uppercase}
+.eyebrow-tags{display:flex;gap:8px;flex-wrap:wrap}
+.etag{font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:4px 12px;font-family:var(--mono)}
+
+.hero-title{
+  font-family:var(--serif);
+  font-size:clamp(48px,6vw,96px);
+  line-height:0.93;
+  letter-spacing:-5px;
+  margin:auto 0;
+  padding:40px 0;
+}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .line span{display:block;transform:translateY(110%);animation:slideUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero-title .line:nth-child(1) span{animation-delay:0.1s}
+.hero-title .line:nth-child(2) span{animation-delay:0.2s}
+.hero-title .line:nth-child(3) span{animation-delay:0.3s}
+.hero-title .line:nth-child(4) span{animation-delay:0.4s}
+.hero-title em{font-style:italic;color:var(--accent)}
+@keyframes slideUp{to{transform:translateY(0)}}
+
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.hero-desc{font-size:14px;color:var(--muted2);line-height:1.75;max-width:400px}
+.hero-ctas{display:flex;gap:10px;flex-shrink:0}
+.btn-p{background:var(--accent);color:#0a0a0a;font-size:12px;font-weight:500;padding:13px 26px;border-radius:100px;text-decoration:none;letter-spacing:0.3px;transition:opacity 0.2s;white-space:nowrap}
+.btn-p:hover{opacity:0.85}
+.btn-g{background:transparent;color:var(--text);font-size:12px;padding:13px 26px;border-radius:100px;text-decoration:none;border:1px solid var(--line);transition:border-color 0.2s;white-space:nowrap}
+.btn-g:hover{border-color:rgba(255,255,255,0.3)}
+
+.hero-right{
+  padding:64px 40px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.hero-right-top{font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:32px}
+.stat-stack{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:24px}
+.stat-box{background:var(--bg);padding:22px 24px;transition:background 0.2s}
+.stat-box:hover{background:var(--bg3)}
+.stat-num{font-family:var(--serif);font-size:40px;color:var(--accent);line-height:1;margin-bottom:4px}
+.stat-label{font-size:11px;color:var(--muted);line-height:1.4}
+.location-bar{border:1px solid var(--line);border-radius:10px;padding:14px 20px;display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted);font-family:var(--mono)}
+
+/* MARQUEE */
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 0;background:var(--bg)}
+.marquee-track{display:flex;width:max-content;animation:scroll 28s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{display:flex;align-items:center;gap:0;white-space:nowrap}
+.marquee-item span{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;padding:0 24px;font-family:var(--mono)}
+.marquee-item .dot-sep{color:var(--accent);padding:0 4px;font-size:14px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.section{padding:112px 52px;border-top:1px solid var(--line)}
+.sec-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:80px}
+.sec-label{font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:1.5px;text-transform:uppercase}
+.sec-count{font-size:10px;color:var(--muted);font-family:var(--mono)}
+
+/* BIG HEADING */
+.big-head{
+  font-family:var(--serif);
+  font-size:clamp(52px,6.5vw,96px);
+  line-height:0.97;
+  letter-spacing:-2px;
+  margin-bottom:24px;
+}
+.big-head em{font-style:italic;color:var(--accent)}
+.sec-sub{font-size:13px;color:var(--muted2);max-width:480px;line-height:1.8;margin-bottom:56px}
+
+/* WHAT I DO — SERVICES GRID */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:40px}
+.service-cell{background:var(--bg);padding:36px 32px;transition:background 0.25s}
+.service-cell:hover{background:var(--bg3)}
+.service-num{font-size:10px;color:var(--muted);font-family:var(--mono);margin-bottom:24px;letter-spacing:1px}
+.service-name{font-family:var(--serif);font-size:22px;line-height:1.1;margin-bottom:12px;letter-spacing:-0.3px}
+.service-desc{font-size:12px;color:var(--muted2);line-height:1.7}
+.service-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:16px}
+.stag{font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:3px 10px;font-family:var(--mono)}
+.stag.hot{color:var(--accent);border-color:rgba(200,240,77,0.3);background:var(--accent-dim)}
+
+/* PROJECTS */
+.projects-list{display:flex;flex-direction:column}
+.proj-row{
+  display:grid;
+  grid-template-columns:80px 1fr 200px 140px;
+  gap:32px;align-items:start;
+  padding:32px 0;
+  border-bottom:1px solid var(--line);
+  text-decoration:none;color:inherit;
+  transition:all 0.2s;
+  border-radius:8px;
+  cursor:none;
+}
+.proj-row:hover{background:var(--bg3);padding-left:20px;padding-right:20px;margin:0 -20px}
+.proj-row:hover .proj-arrow{opacity:1;transform:translate(2px,-2px)}
+.proj-num{font-family:var(--serif);font-size:13px;color:var(--muted);font-style:italic;padding-top:3px}
+.proj-name{font-size:19px;font-weight:500;letter-spacing:-0.3px;margin-bottom:8px}
+.proj-desc{font-size:12px;color:var(--muted2);line-height:1.6}
+.proj-stack{display:flex;flex-wrap:wrap;gap:5px;padding-top:4px}
+.proj-tag{font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:3px 9px;font-family:var(--mono)}
+.proj-arrow{font-size:22px;color:var(--accent);opacity:0;transition:all 0.2s;text-align:right;padding-top:2px}
+
+/* SKILLS */
+.skills-mega{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.skill-block{background:var(--bg);padding:36px 32px;transition:background 0.2s}
+.skill-block:hover{background:var(--bg3)}
+.skill-cat{font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px}
+.skill-tags{display:flex;flex-wrap:wrap;gap:7px}
+.sk{font-size:12px;color:var(--text);background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:6px 14px}
+.sk.hot{background:var(--accent-dim);border-color:rgba(200,240,77,0.3);color:var(--accent)}
+
+/* EXPERIENCE */
+.exp-items{display:flex;flex-direction:column}
+.exp-item{
+  display:grid;grid-template-columns:200px 1fr 160px;
+  gap:40px;padding:40px 0;border-bottom:1px solid var(--line);
+  align-items:start;
+}
+.exp-date{font-size:11px;color:var(--muted);font-family:var(--mono);padding-top:4px}
+.exp-co{font-size:18px;font-weight:500;letter-spacing:-0.2px;margin-bottom:3px}
+.exp-role{font-size:12px;color:var(--muted);font-family:var(--mono);margin-bottom:16px;letter-spacing:0.5px;text-transform:uppercase}
+.exp-buls{list-style:none;display:flex;flex-direction:column;gap:8px}
+.exp-buls li{font-size:13px;color:var(--muted2);line-height:1.6;padding-left:16px;position:relative}
+.exp-buls li::before{content:'—';position:absolute;left:0;color:var(--accent);font-size:11px;top:3px}
+.exp-loc{font-size:11px;color:var(--muted);font-family:var(--mono);text-align:right;padding-top:4px}
+.exp-badge{display:inline-block;font-size:9px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(200,240,77,0.3);border-radius:100px;padding:2px 8px;margin-top:6px;font-family:var(--mono);letter-spacing:0.5px}
+
+/* ABOUT */
+.about-split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-body{font-size:15px;color:var(--muted2);line-height:1.85}
+.about-body p+p{margin-top:20px}
+.about-body strong{color:var(--text);font-weight:500}
+.about-nums{display:flex;flex-direction:column;gap:0}
+.about-num-row{display:flex;align-items:baseline;justify-content:space-between;padding:24px 0;border-bottom:1px solid var(--line)}
+.about-big{font-family:var(--serif);font-size:52px;line-height:1;color:var(--text)}
+.about-desc{font-size:11px;color:var(--muted);text-align:right;max-width:160px;line-height:1.5;font-family:var(--mono)}
+
+/* EDUCATION */
+.edu-row{display:flex;align-items:center;justify-content:space-between;padding:36px 0;border-bottom:1px solid var(--line)}
+.edu-left .edu-univ{font-size:20px;font-weight:500;letter-spacing:-0.2px;margin-bottom:4px}
+.edu-left .edu-deg{font-size:13px;color:var(--muted2)}
+.edu-left .edu-minor{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:8px;letter-spacing:0.5px}
+.edu-right{text-align:right}
+.edu-cgpa{font-family:var(--serif);font-size:36px;color:var(--accent)}
+.edu-year{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:4px}
+
+/* CERTIFICATIONS */
+.cert-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px}
+.cert-pill{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:100px;padding:10px 18px;font-size:11px;color:var(--muted2);font-family:var(--mono)}
+.cert-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* CONTACT */
+.contact-split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end}
+.contact-head{font-family:var(--serif);font-size:clamp(48px,6vw,88px);line-height:0.95;letter-spacing:-2px}
+.contact-head em{font-style:italic;color:var(--accent)}
+.contact-links{display:flex;flex-direction:column;gap:10px}
+.c-link{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 26px;border:1px solid var(--line);border-radius:12px;
+  text-decoration:none;color:var(--text);font-size:14px;
+  transition:all 0.2s;cursor:none;
+}
+.c-link:hover{border-color:var(--accent);background:var(--accent-dim)}
+.c-link-arr{color:var(--accent);font-size:20px;transition:transform 0.2s}
+.c-link:hover .c-link-arr{transform:translate(3px,-3px)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:28px 52px;display:flex;align-items:center;justify-content:space-between}
+.foot-logo{font-family:var(--serif);font-size:16px}
+.foot-mid{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.foot-links{display:flex;gap:24px}
+.foot-links a{font-size:11px;color:var(--muted);text-decoration:none;font-family:var(--mono);transition:color 0.2s}
+.foot-links a:hover{color:var(--text)}
+
+/* SCROLL REVEAL */
+.sr{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.sr.in{opacity:1;transform:translateY(0)}
+.sr-left{opacity:0;transform:translateX(-24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.sr-left.in{opacity:1;transform:translateX(0)}
+
+/* HORIZONTAL SCROLL TICKER */
+.ticker-wrap{overflow:hidden;padding:18px 0;border-top:1px solid var(--line)}
+.ticker-inner{display:flex;gap:0;animation:ticker 20s linear infinite;width:max-content}
+.ticker-item{font-family:var(--serif);font-size:clamp(48px,6vw,80px);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,0.15);white-space:nowrap;padding:0 40px;letter-spacing:-1px;font-style:italic}
+.ticker-item.filled{color:var(--text);-webkit-text-stroke:0}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:18px 20px}
+  .nav-links{display:none}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-left{padding:40px 20px}
+  .hero-right{display:none}
+  .section{padding:64px 20px}
+  .services-grid{grid-template-columns:1fr}
+  .about-split,.contact-split,.exp-item{grid-template-columns:1fr}
+  .skills-mega{grid-template-columns:1fr}
+  .proj-row{grid-template-columns:48px 1fr}
+  .proj-stack,.proj-arrow{display:none}
+  footer{flex-direction:column;gap:14px;padding:24px 20px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#top" class="nav-logo">Greeshma©</a>
+  <ul class="nav-links">
+    <li><a href="#whatido">What I Do</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status"><div class="dot"></div>Open to remote · 2026</div>
+</nav>
+
+<!-- HERO -->
+<div id="top" class="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div style="overflow:hidden;padding-bottom:12px"><span style="display:block;font-family:var(--serif);font-size:clamp(72px,13vw,200px);line-height:0.88;letter-spacing:-4px;color:var(--accent);font-style:italic;transform:translateY(110%);animation:slideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.05s forwards">Greeshma<span style="color:var(--text);font-style:normal;font-size:0.25em;vertical-align:super;letter-spacing:0">©</span></span></div>
+      <div class="hero-eyebrow">
+        <span class="eyebrow-tag">© BG — 01</span>
+        <div class="eyebrow-tags">
+          <span class="etag">AI Engineer</span>
+          <span class="etag">LLM Systems</span>
+          <span class="etag">Full Stack</span>
+          <span class="etag">Data Science</span>
+        </div>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line"><span>Systems</span></span>
+        <span class="line"><span>that think,</span></span>
+        <span class="line"><span>ship, and</span></span>
+        <span class="line"><span><em>perform.</em></span></span>
+      </h1>
+
+      <div class="hero-bottom">
+        <p class="hero-desc">Final-year CS student (Aug 2026) who builds production-grade AI — RAG pipelines, agentic workflows, full-stack SaaS, and ML systems. Not just demos. Real metrics, real users, real code.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-p">Get in touch ↗</a>
+          <a href="#projects" class="btn-g">See work</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-right-top">© Live stats — BG·00</div>
+      <div class="stat-stack">
+        <div class="stat-box">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Concurrent requests handled<br>at &lt;200ms latency</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">40%</div>
+          <div class="stat-label">Relevance improvement over<br>baseline keyword search</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">15+</div>
+          <div class="stat-label">Client projects delivered<br>remotely, avg. 7–10 days</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">92%</div>
+          <div class="stat-label">Threat detection accuracy<br>on BLACKBOX anomaly model</div>
+        </div>
+      </div>
+      <div class="location-bar">
+        <div class="dot"></div>
+        Bengaluru, India &nbsp;·&nbsp; Remote · Open worldwide
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="ticker-item">LLM Engineer</span>
+    <span class="ticker-item filled">AI Systems</span>
+    <span class="ticker-item">Full Stack</span>
+    <span class="ticker-item filled">Data Science</span>
+    <span class="ticker-item">Backend APIs</span>
+    <span class="ticker-item filled">RAG Pipelines</span>
+    <span class="ticker-item">Agentic AI</span>
+    <span class="ticker-item filled">Open to Remote</span>
+    <!-- dupe -->
+    <span class="ticker-item">LLM Engineer</span>
+    <span class="ticker-item filled">AI Systems</span>
+    <span class="ticker-item">Full Stack</span>
+    <span class="ticker-item filled">Data Science</span>
+    <span class="ticker-item">Backend APIs</span>
+    <span class="ticker-item filled">RAG Pipelines</span>
+    <span class="ticker-item">Agentic AI</span>
+    <span class="ticker-item filled">Open to Remote</span>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>Python</span><span class="dot-sep">✦</span><span>LangChain</span><span class="dot-sep">✦</span><span>FAISS</span><span class="dot-sep">✦</span><span>Claude API</span><span class="dot-sep">✦</span><span>FastAPI</span><span class="dot-sep">✦</span><span>React</span><span class="dot-sep">✦</span><span>TypeScript</span><span class="dot-sep">✦</span><span>Docker</span><span class="dot-sep">✦</span><span>MongoDB</span><span class="dot-sep">✦</span><span>Scikit-learn</span><span class="dot-sep">✦</span><span>Kafka</span><span class="dot-sep">✦</span><span>Whisper</span><span class="dot-sep">✦</span><span>Llama</span><span class="dot-sep">✦</span><span>PostgreSQL</span><span class="dot-sep">✦</span><span>AWS</span><span class="dot-sep">✦</span></div>
+    <div class="marquee-item"><span>Python</span><span class="dot-sep">✦</span><span>LangChain</span><span class="dot-sep">✦</span><span>FAISS</span><span class="dot-sep">✦</span><span>Claude API</span><span class="dot-sep">✦</span><span>FastAPI</span><span class="dot-sep">✦</span><span>React</span><span class="dot-sep">✦</span><span>TypeScript</span><span class="dot-sep">✦</span><span>Docker</span><span class="dot-sep">✦</span><span>MongoDB</span><span class="dot-sep">✦</span><span>Scikit-learn</span><span class="dot-sep">✦</span><span>Kafka</span><span class="dot-sep">✦</span><span>Whisper</span><span class="dot-sep">✦</span><span>Llama</span><span class="dot-sep">✦</span><span>PostgreSQL</span><span class="dot-sep">✦</span><span>AWS</span><span class="dot-sep">✦</span></div>
+  </div>
+</div>
+
+<!-- WHAT I DO -->
+<section class="section" id="whatido">
+  <div class="sec-meta sr">
+    <span class="sec-label">© What I Do — WDX·02</span>
+    <span class="sec-count">6 capabilities</span>
+  </div>
+  <h2 class="big-head sr">Services<br><em>&amp; Skills.</em></h2>
+  <p class="sec-sub sr">I work across the full AI and engineering stack — from LLM pipelines to full-stack SaaS to ML models. Here's what I actually build.</p>
+
+  <div class="services-grid sr">
+    <div class="service-cell">
+      <div class="service-num">01</div>
+      <div class="service-name">LLM &amp;<br>AI Engineering</div>
+      <div class="service-desc">RAG pipelines, agentic workflows, LLM fine-tuning, voice AI, and real-time inference systems built for production — not just notebooks.</div>
+      <div class="service-tags">
+        <span class="stag hot">LangChain</span><span class="stag hot">FAISS</span><span class="stag hot">Claude API</span><span class="stag hot">Whisper</span><span class="stag hot">Llama</span><span class="stag">Hugging Face</span><span class="stag">Prompt Engineering</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-num">02</div>
+      <div class="service-name">Full Stack<br>Development</div>
+      <div class="service-desc">End-to-end SaaS applications — React/TypeScript frontends with FastAPI/Node.js backends, auth, payments, and cloud deployment.</div>
+      <div class="service-tags">
+        <span class="stag hot">React</span><span class="stag hot">TypeScript</span><span class="stag">Node.js</span><span class="stag">PostgreSQL</span><span class="stag">JWT</span><span class="stag">Stripe</span><span class="stag">Docker</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-num">03</div>
+      <div class="service-name">Backend &amp;<br>API Systems</div>
+      <div class="service-desc">Scalable async APIs, microservices, and data pipelines. 500+ concurrent requests at &lt;200ms — built with FastAPI, MongoDB, and Kafka.</div>
+      <div class="service-tags">
+        <span class="stag hot">FastAPI</span><span class="stag">Kafka</span><span class="stag">Redis</span><span class="stag">MongoDB</span><span class="stag">Elasticsearch</span><span class="stag">AWS Lambda</span><span class="stag">REST APIs</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-num">04</div>
+      <div class="service-name">Data Science<br>&amp; ML</div>
+      <div class="service-desc">Anomaly detection, NLP, classification, and predictive models. 92% threat detection accuracy. 17% e-commerce conversion improvement.</div>
+      <div class="service-tags">
+        <span class="stag hot">Scikit-learn</span><span class="stag">Pandas</span><span class="stag">NLTK</span><span class="stag">Sentence Transformers</span><span class="stag">OpenCV</span><span class="stag">Kafka</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-num">05</div>
+      <div class="service-name">Cybersecurity<br>AI</div>
+      <div class="service-desc">AI-powered threat hunting, breach prediction, and anomaly detection systems with real-time monitoring and graph-based intrusion pattern recognition.</div>
+      <div class="service-tags">
+        <span class="stag">BLACKBOX</span><span class="stag">Elasticsearch</span><span class="stag">Flask</span><span class="stag">Pandas</span><span class="stag">Scikit-learn</span><span class="stag">Socket Programming</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-num">06</div>
+      <div class="service-name">Freelance<br>Delivery</div>
+      <div class="service-desc">15+ client projects delivered remotely in under 10 days each. Full lifecycle — requirements, build, deploy, iterate. Production-ready every time.</div>
+      <div class="service-tags">
+        <span class="stag">Flask</span><span class="stag">MySQL</span><span class="stag">Firebase</span><span class="stag">Vercel</span><span class="stag">Netlify</span><span class="stag">Git</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="sec-meta sr">
+    <span class="sec-label">© Featured Projects — WDX·03</span>
+    <span class="sec-count">7 projects</span>
+  </div>
+  <h2 class="big-head sr">Selected<br><em>Works©</em></h2>
+  <p class="sec-sub sr">Every project ships with real metrics, a public repo, and production-grade code. Demos available on request.</p>
+
+  <div class="projects-list">
+    <a href="https://github.com/greeshmab21/clinical-blind-spot-detector" target="_blank" class="proj-row sr">
+      <div class="proj-num">01</div>
+      <div>
+        <div class="proj-name">Clinical Blind-Spot Detector</div>
+        <div class="proj-desc">Real-time clinical AI — streams live doctor visit audio through Whisper + Claude API to detect missed screenings (PHQ-9, AUDIT-C) before the patient leaves. Validated on 50 transcripts, 3+ blind spots surfaced per visit at &lt;2s latency.</div>
+      </div>
+      <div class="proj-stack"><span class="proj-tag">Python</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Whisper</span><span class="proj-tag">Claude API</span></div>
+      <div class="proj-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/greeshmab21/agentic-workflow-execution-engine" target="_blank" class="proj-row sr">
+      <div class="proj-num">02</div>
+      <div>
+        <div class="proj-name">Agentic Workflow Execution Engine</div>
+        <div class="proj-desc">Orchestrated dynamic AI pipelines handling 500+ concurrent requests at &lt;200ms latency. Async FastAPI with 8+ pluggable workflow types and fault-tolerant MongoDB persistence layer.</div>
+      </div>
+      <div class="proj-stack"><span class="proj-tag">FastAPI</span><span class="proj-tag">MongoDB</span><span class="proj-tag">Async Python</span><span class="proj-tag">REST APIs</span></div>
+      <div class="proj-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/greeshmab21/rag-qa-system" target="_blank" class="proj-row sr">
+      <div class="proj-num">03</div>
+      <div>
+        <div class="proj-name">RAG Q&A System</div>
+        <div class="proj-desc">Context-aware answers across 10K+ document chunks at &lt;1.5s retrieval latency. 40% relevance improvement over keyword search using FAISS + FLAN-T5 embeddings and LangChain ingestion pipeline.</div>
+      </div>
+      <div class="proj-stack"><span class="proj-tag">LangChain</span><span class="proj-tag">FAISS</span><span class="proj-tag">HuggingFace</span><span class="proj-tag">Python</span></div>
+      <div class="proj-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/greeshmab21/ai-customer-support" target="_blank" class="proj-row sr">
+      <div class="proj-num">04</div>
+      <div>
+        <div class="proj-name">AI Customer Support Platform</div>
+        <div class="proj-desc">Full-stack SaaS with AI ticket categorization, summarization, and response generation. Role-based access, semantic search via FAISS, JWT auth, and real-time ticket management dashboard.</div>
+      </div>
+      <div class="proj-stack"><span class="proj-tag">React</span><span class="proj-tag">TypeScript</span><span class="proj-tag">FastAPI</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">OpenAI API</span></div>
+      <div class="proj-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/greeshmab21/ecommerce-saas" target="_blank" class="proj-row sr">
+      <div class="proj-num">05</div>
+      <div>
+        <div class="proj-name">Multi-Tenant E-Commerce SaaS</div>
+        <div class="proj-desc">SaaS platform letting businesses launch and manage online stores. AI-powered product description generation, Stripe payments, inventory management, analytics dashboards, and AWS/GCP deployment.</div>
+      </div>
+      <div class="proj-stack"><span class="proj-tag">React</span><span class="proj-tag">TypeScript</span><span class="proj-tag">Node.js</span><span class="proj-tag">Stripe</span><span class="proj-tag">AWS</span></div>
+      <div class="proj-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/greeshmab21/blackbox-threat-detection" target="_blank" class="proj-row sr">
+      <div class="proj-num">06</div>
+      <div>
+        <div class="proj-name">BLACKBOX — AI Threat Detection</div>
+        <div class="proj-desc">AI-powered cybersecurity platform for anomaly detection and breach prediction. Graph-based algorithms for intrusion pattern recognition achieving 92% detection accuracy with real-time monitoring dashboard.</div>
+      </div>
+      <div class="proj-stack"><span class="proj-tag">Scikit-learn</span><span class="proj-tag">Pandas</span><span class="proj-tag">Flask</span><span class="proj-tag">Socket</span></div>
+      <div class="proj-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/greeshmab21/cart-abandonment-recovery" target="_blank" class="proj-row sr">
+      <div class="proj-num">07</div>
+      <div>
+        <div class="proj-name">AI Cart Abandonment Recovery</div>
+        <div class="proj-desc">Trie-based search + predictive ML model to identify high-risk abandonment users in real time. Improved simulated checkout conversion rates by 17% on large-scale e-commerce datasets using Kafka event streaming.</div>
+      </div>
+      <div class="proj-stack"><span class="proj-tag">Kafka</span><span class="proj-tag">Redis</span><span class="proj-tag">Scikit-learn</span><span class="proj-tag">FastAPI</span></div>
+      <div class="proj-arrow">↗</div>
+    </a>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="sec-meta sr">
+    <span class="sec-label">© Skills & Stack — WDX·04</span>
+    <span class="sec-count">40+ technologies</span>
+  </div>
+  <h2 class="big-head sr">Technical<br><em>Stack.</em></h2>
+
+  <div class="skills-mega sr">
+    <div class="skill-block">
+      <div class="skill-cat">AI / LLM</div>
+      <div class="skill-tags">
+        <span class="sk hot">LangChain</span><span class="sk hot">FAISS</span><span class="sk hot">Claude API</span><span class="sk hot">Whisper</span><span class="sk hot">Llama</span><span class="sk">Hugging Face</span><span class="sk">FLAN-T5</span><span class="sk">Sentence Transformers</span><span class="sk">OpenAI API</span><span class="sk">Prompt Engineering</span><span class="sk">RAG</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">Frontend</div>
+      <div class="skill-tags">
+        <span class="sk hot">React</span><span class="sk hot">TypeScript</span><span class="sk">HTML</span><span class="sk">CSS</span><span class="sk">JavaScript</span><span class="sk">JWT Auth</span><span class="sk">Stripe</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">Backend & APIs</div>
+      <div class="skill-tags">
+        <span class="sk hot">FastAPI</span><span class="sk hot">Async Python</span><span class="sk">Flask</span><span class="sk">Node.js</span><span class="sk">REST APIs</span><span class="sk">AWS Lambda</span><span class="sk">AWS S3</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">Data & ML</div>
+      <div class="skill-tags">
+        <span class="sk hot">Scikit-learn</span><span class="sk">Pandas</span><span class="sk">NLTK</span><span class="sk">OpenCV</span><span class="sk">Kafka</span><span class="sk">Redis</span><span class="sk">Elasticsearch</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">Databases</div>
+      <div class="skill-tags">
+        <span class="sk">MongoDB</span><span class="sk">PostgreSQL</span><span class="sk">MySQL</span><span class="sk">Firebase</span><span class="sk">Supabase</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-cat">DevOps & Tools</div>
+      <div class="skill-tags">
+        <span class="sk hot">Docker</span><span class="sk">Git</span><span class="sk">GitHub</span><span class="sk">Linux</span><span class="sk">Agile/Scrum</span><span class="sk">Vercel</span><span class="sk">Netlify</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="sec-meta sr">
+    <span class="sec-label">© Experience — WDX·05</span>
+    <span class="sec-count">3 roles</span>
+  </div>
+  <h2 class="big-head sr">Where I've<br><em>Worked.</em></h2>
+
+  <div class="exp-items">
+    <div class="exp-item sr">
+      <div class="exp-date">Feb 2024 — May 2024</div>
+      <div>
+        <div class="exp-co">DeepVisionTech.AI</div>
+        <div class="exp-role">Software Engineering Intern · Startup</div>
+        <ul class="exp-buls">
+          <li>Conducted comparative prompt engineering research across multiple LLMs (Bard, early GPT variants), analysing how prompt structure and phrasing affected model output quality and consistency.</li>
+          <li>Contributed to an AI-powered sign language application using Blender animation pipelines to convert speech into real-time sign language gestures for deaf users.</li>
+        </ul>
+        <span class="exp-badge">Bengaluru · Startup</span>
+      </div>
+      <div class="exp-loc">Bengaluru<br>India</div>
+    </div>
+
+    <div class="exp-item sr">
+      <div class="exp-date">Jan 2024 — Present</div>
+      <div>
+        <div class="exp-co">Freelance Full-Stack Developer</div>
+        <div class="exp-role">Self-Initiated · Remote</div>
+        <ul class="exp-buls">
+          <li>Delivered 15+ client projects over 18 months, building full-stack web applications using Python, FastAPI, Flask, and MySQL — consistently within 7–10 days per project.</li>
+          <li>Integrated AI features into client applications based on project needs, managing full delivery lifecycle from requirements to production deployment.</li>
+        </ul>
+        <span class="exp-badge">Remote · Worldwide</span>
+      </div>
+      <div class="exp-loc">Remote<br>Worldwide</div>
+    </div>
+
+    <div class="exp-item sr">
+      <div class="exp-date">2024</div>
+      <div>
+        <div class="exp-co">JPMorgan Chase & Co.</div>
+        <div class="exp-role">Software Engineering Virtual Experience · Forage</div>
+        <ul class="exp-buls">
+          <li>Completed simulated software development tasks including API integration, data visualization, and performance optimization using industry-standard tools and workflows.</li>
+        </ul>
+        <span class="exp-badge">Virtual · Forage</span>
+      </div>
+      <div class="exp-loc">Virtual<br>Experience</div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="edu-row sr">
+    <div class="edu-left">
+      <div class="edu-univ">RV University</div>
+      <div class="edu-deg">B.Tech Computer Science & Engineering</div>
+      <div class="edu-minor">Minor: AI For Good &nbsp;·&nbsp; Major: Advanced Google Cloud, MLOps & LLMOps, Web Dev</div>
+    </div>
+    <div class="edu-right">
+      <div class="edu-cgpa">7.7<span style="font-size:18px;color:var(--muted)">/10</span></div>
+      <div class="edu-year">Aug 2022 — Aug 2026</div>
+    </div>
+  </div>
+
+  <div class="cert-row sr">
+    <div class="cert-pill"><div class="cert-dot"></div>Deep Learning for Developers — Infosys Springboard</div>
+    <div class="cert-pill"><div class="cert-dot"></div>Prompt Engineering — Infosys Springboard</div>
+    <div class="cert-pill"><div class="cert-dot"></div>Introduction to Cybersecurity — Cisco</div>
+    <div class="cert-pill"><div class="cert-dot"></div>300+ DSA Problems Solved</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="sec-meta sr">
+    <span class="sec-label">© About — WDX·06</span>
+    <span class="sec-count">Greeshma</span>
+  </div>
+  <div class="about-split">
+    <div>
+      <h2 class="big-head sr">I build AI<br>that <em>ships.</em></h2>
+      <div class="about-body sr">
+        <p>I'm a final-year CS student at RV University, graduating August 2026. I work across the full stack — <strong>LLM systems, full-stack SaaS, ML models, backend APIs, and data science</strong> — not just one lane.</p>
+        <p>My internship at DeepVisionTech.AI got me deep into LLM behaviour and prompt engineering research early. Since then I've built 7+ production systems — a real-time clinical AI tool, an agentic engine handling 500+ concurrent requests, a multi-tenant SaaS, a cybersecurity AI with 92% accuracy, and more.</p>
+        <p>I've also delivered <strong>15+ freelance projects</strong> remotely, always within 10 days, always production-ready. I'm looking for a remote role where I can keep building things that work at scale.</p>
+      </div>
+    </div>
+    <div class="about-nums sr">
+      <div class="about-num-row"><div class="about-big">7+</div><div class="about-desc">Production AI & full-stack systems built</div></div>
+      <div class="about-num-row"><div class="about-big">15+</div><div class="about-desc">Client projects delivered remotely</div></div>
+      <div class="about-num-row"><div class="about-big">92%</div><div class="about-desc">ML model accuracy on threat detection</div></div>
+      <div class="about-num-row"><div class="about-big">300+</div><div class="about-desc">DSA problems solved across platforms</div></div>
+      <div class="about-num-row"><div class="about-big">40+</div><div class="about-desc">Technologies across AI, backend & cloud</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="sec-meta sr">
+    <span class="sec-label">© Contact — WDX·07</span>
+    <span class="sec-count">Open to work</span>
+  </div>
+  <div class="contact-split">
+    <h2 class="contact-head sr">Let's build<br>something<br><em>real.</em></h2>
+    <div class="contact-links sr">
+      <a href="mailto:greeshmab.21@gmail.com" class="c-link">
+        <span>greeshmab.21@gmail.com</span>
+        <span class="c-link-arr">↗</span>
+      </a>
+      <a href="https://www.linkedin.com/in/greeshmab21" target="_blank" class="c-link">
+        <span>LinkedIn</span>
+        <span class="c-link-arr">↗</span>
+      </a>
+      <a href="https://github.com/greeshmab21" target="_blank" class="c-link">
+        <span>GitHub</span>
+        <span class="c-link-arr">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">Greeshma©</div>
+  <div class="foot-mid">AI · LLM · Full Stack · Data Science · Open to Remote · 2026</div>
+  <div class="foot-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';ring.style.width='54px';ring.style.height='54px';ring.style.borderColor='rgba(200,240,77,0.7)'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(200,240,77,0.4)'});
+});
+
+// Scroll reveal
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('in'), i*55);
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:0.08});
+document.querySelectorAll('.sr,.sr-left').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

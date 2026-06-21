@@ -1,0 +1,177 @@
+%-------------------------
+% Resume in Latex
+% Based on Jake's Resume Template
+%------------------------
+
+\documentclass[letterpaper,10.5pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\usepackage[left=0.5in, right=0.5in, top=0.45in, bottom=0.45in]{geometry}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Busireddy Greeshma} \\ \vspace{4pt}
+    \small
+    \href{mailto:greeshmab.21@gmail.com}{\underline{greeshmab.21@gmail.com}} $|$
+    \href{https://linkedin.com/in/YOUR-URL}{\underline{LinkedIn}} $|$
+    \href{https://github.com/greeshmab21}{\underline{GitHub}} $|$
+    Remote $\cdot$ Open worldwide
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Summary}
+\small{Final-year CS student (graduating Aug 2026) with hands-on experience building production-grade AI systems --- a real-time clinical AI tool, an agentic workflow engine handling 500+ concurrent requests, and RAG-based document intelligence pipelines. Proficient in Python, FastAPI, LangChain, FAISS, and LLM APIs (Claude, Whisper, Llama). Seeking remote AI/ML or LLM Engineering roles.}
+
+\vspace{-4pt}
+
+%-----------SKILLS-----------
+\section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Python, C, SQL} \\
+     \textbf{AI / ML}{: LangChain, FAISS, Hugging Face, Whisper, Claude API, Llama, Prompt Engineering} \\
+     \textbf{Backend}{: FastAPI, Flask, REST APIs, AWS Lambda, AWS S3, Async Python} \\
+     \textbf{Databases}{: PostgreSQL, MySQL, MongoDB, Firebase, Supabase} \\
+     \textbf{DevOps / Tools}{: Docker, Git, GitHub, Agile/Scrum} \\
+     \textbf{Frontend}{: React, HTML, CSS}
+    }}
+ \end{itemize}
+
+\vspace{-4pt}
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+
+      \resumeProjectHeading
+          {\textbf{Clinical Blind-Spot Detector} $|$ \emph{Python, FastAPI, Whisper, Claude API} $|$ \href{https://github.com/greeshmab21/clinical-blind-spot-detector}{\underline{GitHub}}}{}
+          \resumeItemListStart
+            \resumeItem{Built a real-time clinical AI pipeline streaming live visit audio through Whisper + Claude API to detect unasked screening questions (PHQ-9, AUDIT-C) before the patient leaves.}
+            \resumeItem{Validated across 50 simulated transcripts, surfacing 3+ missed blind spots per visit at under 2s end-to-end latency.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Agentic Workflow Execution Engine} $|$ \emph{Python, FastAPI, MongoDB, REST APIs} $|$ \href{https://github.com/greeshmab21/agentic-workflow-execution-engine}{\underline{GitHub}}}{}
+          \resumeItemListStart
+            \resumeItem{Orchestrated dynamic AI pipelines handling 500+ concurrent requests at under 200ms latency using async FastAPI with modular REST architecture supporting 8+ pluggable workflow types.}
+            \resumeItem{Integrated MongoDB persistence layer enabling stateful task execution and fault-tolerant pipeline recovery across distributed agent workflows.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Retrieval-Augmented Generation (RAG) Q\&A System} $|$ \emph{Python, FAISS, HuggingFace, LangChain} $|$ \href{https://github.com/greeshmab21}{\underline{GitHub}}}{}
+          \resumeItemListStart
+            \resumeItem{Delivered context-aware answers across 10K+ document chunks at under 1.5s retrieval latency, improving answer relevance 40\% over baseline keyword search using FAISS + FLAN-T5 semantic embeddings.}
+            \resumeItem{Built end-to-end ingestion pipeline using LangChain supporting multi-format documents (PDF, DOCX, TXT) with real-time query handling.}
+          \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+\vspace{-4pt}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Software Engineering Intern}{Feb 2024 -- May 2024}
+      {DeepVisionTech.AI}{Bengaluru, India}
+      \resumeItemListStart
+        \resumeItem{Conducted comparative prompt engineering research across multiple LLMs (Bard, early GPT variants), analysing how prompt structure and phrasing affected model output quality and consistency.}
+        \resumeItem{Contributed to an AI-powered sign language application using Blender animation pipelines to convert speech into real-time sign language gestures for deaf users.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Freelance Full-Stack Developer}{Jan 2024 -- Present}
+      {Self-Initiated}{Remote}
+      \resumeItemListStart
+        \resumeItem{Delivered 15+ client projects over 18 months, building full-stack web applications using Python, FastAPI, Flask, and MySQL --- consistently delivering within 7--10 days per project.}
+        \resumeItem{Integrated AI features into client applications based on project needs, managing full delivery lifecycle from requirements gathering to production deployment.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+\vspace{-4pt}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {RV University}{Bengaluru, India}
+      {Bachelor of Technology, Computer Science $|$ CGPA: 7.7/10}{Aug 2022 -- Aug 2026}
+  \resumeSubHeadingListEnd
+
+\vspace{-4pt}
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Deep Learning for Developers} --- Infosys Springboard \\
+     \textbf{Prompt Engineering} --- Infosys Springboard \\
+     \textbf{Introduction to Cybersecurity} --- Cisco
+    }}
+ \end{itemize}
+
+\end{document}
